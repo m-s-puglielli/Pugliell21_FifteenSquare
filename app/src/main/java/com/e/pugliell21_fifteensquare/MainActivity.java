@@ -3,6 +3,7 @@ package com.e.pugliell21_fifteensquare;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.widget.ImageButton;
 
 public class MainActivity extends AppCompatActivity
 {
@@ -14,6 +15,10 @@ public class MainActivity extends AppCompatActivity
 
 
 
-//		FifteenSquareSurfaceView surface_view = (FifteenSquareSurfaceView) findViewById(R.id.);
+		ImageButton image_button = (ImageButton) findViewById(R.id.Card);
+
+		FifteenSquareHandler handler = new FifteenSquareHandler(image_button);
+
+		image_button.setOnClickListener(handler);
 	}
 }
