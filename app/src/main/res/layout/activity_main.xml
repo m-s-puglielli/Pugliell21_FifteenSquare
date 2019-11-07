@@ -7,7 +7,7 @@
 	tools:context=".MainActivity">
 
 	<androidx.constraintlayout.widget.Guideline
-		android:id="@+id/HorizonalEighthLine"
+		android:id="@+id/HorizonalUpperLine"
 		android:layout_width="wrap_content"
 		android:layout_height="wrap_content"
 		android:orientation="horizontal"
@@ -18,7 +18,7 @@
 		android:layout_width="wrap_content"
 		android:layout_height="wrap_content"
 		android:text="@string/shuffle_board"
-		app:layout_constraintBottom_toTopOf="@+id/HorizonalEighthLine"
+		app:layout_constraintBottom_toTopOf="@+id/HorizonalUpperLine"
 		app:layout_constraintEnd_toEndOf="parent"
 		app:layout_constraintStart_toStartOf="parent" />
 
@@ -147,5 +147,21 @@
 		android:layout_height="wrap_content"
 		app:layout_constraintStart_toEndOf="@+id/Square32"
 		app:layout_constraintTop_toBottomOf="@+id/Square23" />
+
+	<androidx.constraintlayout.widget.Guideline
+		android:id="@+id/HorizontalLowerLine"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:orientation="horizontal"
+		app:layout_constraintGuide_percent="0.875" />
+
+	<Button
+		android:id="@+id/AutoWin"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:text="@string/auto_win"
+		app:layout_constraintEnd_toEndOf="parent"
+		app:layout_constraintStart_toStartOf="parent"
+		app:layout_constraintTop_toTopOf="@+id/HorizontalLowerLine" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

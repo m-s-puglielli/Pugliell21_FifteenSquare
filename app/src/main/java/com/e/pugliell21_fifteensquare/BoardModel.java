@@ -88,6 +88,20 @@ public class BoardModel
 	}
 
 
+	public void win()
+	{
+		for (int row = 0; row < BOARD_HEIGHT; row++)
+			for (int col = 0; col < BOARD_WIDTH; col++)
+				this.images[row][col] = completed[row][col];
+
+
+		this.set_board();
+
+
+		this.check_if_complete();
+	}
+
+
 
 
 
@@ -158,15 +172,7 @@ public class BoardModel
 		}
 
 
-
-		this.set_board();
-
-
-
-		if (is_complete())
-		{
-			Toast.makeText(this.app_context, "CONGRATS, YOU WIN", Toast.LENGTH_SHORT).show();
-		}
+		this.check_if_complete();
 	}
 
 
@@ -213,15 +219,13 @@ public class BoardModel
 	}
 
 
-
-
-
-	private boolean is_complete()
+	private void check_if_complete()
 	{
 		for (int row = 0; row < BOARD_HEIGHT; row++)
 			for (int col = 0; col < BOARD_WIDTH; col++)
 				if (this.images[row][col] != completed[row][col])
-					return false;
-		return true;
+					return;
+
+		Toast.makeText(this.app_context, "CONGRATS, YOU WIN", Toast.LENGTH_SHORT).show();
 	}
 }

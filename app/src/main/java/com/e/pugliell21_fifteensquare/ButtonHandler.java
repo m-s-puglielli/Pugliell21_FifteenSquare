@@ -41,7 +41,10 @@ public class ButtonHandler implements View.OnClickListener
 
 		// IF THE SHUFFLE BUTTON WAS PRESSED
 		else if (v instanceof Button)
-			this.model.shuffle();
+			if (v.getId() == R.id.Shuffle)
+				this.model.shuffle();
+			else if (v.getId() == R.id.AutoWin)
+				this.model.win();
 	}
 
 
