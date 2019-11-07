@@ -3,13 +3,9 @@ package com.e.pugliell21_fifteensquare;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
-import android.content.res.AssetManager;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.ImageButton;
-
-import java.io.InputStream;
 
 import static com.e.pugliell21_fifteensquare.BoardModel.BOARD_HEIGHT;
 import static com.e.pugliell21_fifteensquare.BoardModel.BOARD_WIDTH;
@@ -67,7 +63,7 @@ public class MainActivity extends AppCompatActivity
 
 
 		// CREATE THE HANDLER
-		FifteenSquareHandler handler = new FifteenSquareHandler(buttons, app_context);
+		ButtonHandler handler = new ButtonHandler(buttons, app_context);
 
 
 

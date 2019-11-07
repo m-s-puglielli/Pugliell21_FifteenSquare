@@ -8,7 +8,7 @@ import android.widget.ImageButton;
 import static com.e.pugliell21_fifteensquare.BoardModel.BOARD_HEIGHT;
 import static com.e.pugliell21_fifteensquare.BoardModel.BOARD_WIDTH;
 
-public class FifteenSquareHandler implements View.OnClickListener
+public class ButtonHandler implements View.OnClickListener
 {
 	private BoardModel model;
 	private ImageButton[][] buttons;
@@ -17,7 +17,7 @@ public class FifteenSquareHandler implements View.OnClickListener
 
 
 
-	public FifteenSquareHandler(ImageButton[][] buttons, Context app_context)
+	public ButtonHandler(ImageButton[][] buttons, Context app_context)
 	{
 		this.model = new BoardModel(buttons, app_context);
 		this.buttons = buttons;
