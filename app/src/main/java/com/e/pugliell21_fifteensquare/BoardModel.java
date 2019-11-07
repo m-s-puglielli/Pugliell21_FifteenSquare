@@ -4,6 +4,9 @@ import android.content.Context;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
+import java.util.ArrayList;
+import java.util.Collections;
+
 public class BoardModel
 {
 	public static final int BOARD_HEIGHT = 4;
@@ -36,25 +39,9 @@ public class BoardModel
 		// SET THE INITIAL BACKGROUND FOR ALL THE BUTTONS
 		this.images = new int[BOARD_HEIGHT][BOARD_WIDTH];
 
-		this.images[0][0] = R.drawable.blank;
-		this.images[0][1] = R.drawable.square1;
-		this.images[0][2] = R.drawable.square2;
-		this.images[0][3] = R.drawable.square3;
-
-		this.images[1][0] = R.drawable.square4;
-		this.images[1][1] = R.drawable.square5;
-		this.images[1][2] = R.drawable.square6;
-		this.images[1][3] = R.drawable.square7;
-
-		this.images[2][0] = R.drawable.square8;
-		this.images[2][1] = R.drawable.square9;
-		this.images[2][2] = R.drawable.square10;
-		this.images[2][3] = R.drawable.square11;
-
-		this.images[3][0] = R.drawable.square12;
-		this.images[3][1] = R.drawable.square13;
-		this.images[3][2] = R.drawable.square14;
-		this.images[3][3] = R.drawable.square15;
+		for (int row = 0; row < BOARD_HEIGHT; row++)
+			for (int col = 0; col < BOARD_WIDTH; col++)
+				this.images[row][col] = completed[row][col];
 
 
 
@@ -68,13 +55,27 @@ public class BoardModel
 
 	public void shuffle()
 	{
-		// SHUFFLE 'images[][]'
-		// TODO: implement "shuffle the board" functionality
+		do
+		{
+			ArrayList<Integer> temp = new ArrayList<>();
+
+			for (int row = 0; row < BOARD_HEIGHT; row++)
+				for (int col = 0; col < BOARD_WIDTH; col++)
+					temp.add(this.images[row][col]);
+
+			Collections.shuffle(temp);
+
+			for (int row = 0; row < BOARD_HEIGHT; row++)
+				for (int col = 0; col < BOARD_WIDTH; col++)
+					this.images[row][col] = temp.get((row * 4) + col);
+		}
+		while (!is_solvable());
 
 
 
 		this.set_board();
 	}
+
 
 
 
@@ -88,6 +89,154 @@ public class BoardModel
 	}
 
 
+	private boolean is_solvable()
+	{
+		int[][] values = new int[BOARD_HEIGHT][BOARD_WIDTH];
+
+		for (int row = 0; row < BOARD_HEIGHT; row++)
+			for (int col = 0; col < BOARD_WIDTH; col++)
+			{
+				switch (this.images[row][col])
+				{
+					case R.drawable.blank:
+						values[row][col] = 0;
+						break;
+
+					case R.drawable.square1:
+						values[row][col] = 1;
+						break;
+
+					case R.drawable.square2:
+						values[row][col] = 2;
+						break;
+
+					case R.drawable.square3:
+						values[row][col] = 3;
+						break;
+
+					case R.drawable.square4:
+						values[row][col] = 4;
+						break;
+
+					case R.drawable.square5:
+						values[row][col] = 5;
+						break;
+
+					case R.drawable.square6:
+						values[row][col] = 6;
+						break;
+
+					case R.drawable.square7:
+						values[row][col] = 7;
+						break;
+
+					case R.drawable.square8:
+						values[row][col] = 8;
+						break;
+
+					case R.drawable.square9:
+						values[row][col] = 9;
+						break;
+
+					case R.drawable.square10:
+						values[row][col] = 10;
+						break;
+
+					case R.drawable.square11:
+						values[row][col] = 11;
+						break;
+
+					case R.drawable.square12:
+						values[row][col] = 12;
+						break;
+
+					case R.drawable.square13:
+						values[row][col] = 13;
+						break;
+
+					case R.drawable.square14:
+						values[row][col] = 14;
+						break;
+
+					case R.drawable.square15:
+						values[row][col] = 15;
+						break;
+
+					default:
+						Toast.makeText(this.app_context, "ERROR -- BoardModel.java:is_solvable()", Toast.LENGTH_SHORT).show();
+				}
+			}
+
+
+		if (values[BOARD_HEIGHT - 1][BOARD_WIDTH - 1] != 0)
+		{
+			for (int row = 0; row < BOARD_HEIGHT - 1; row++)
+				for (int col = 0; col < BOARD_WIDTH; col++)
+					if (values[row][col] == 0)
+						switch_values_down(row, col, row + 1, col, values);
+
+			for (int col = 0; col < BOARD_WIDTH - 1; col++)
+				if (values[BOARD_HEIGHT - 1][col] == 0)
+					switch_values_right(BOARD_HEIGHT - 1, col, BOARD_HEIGHT - 1, col + 1, values);
+		}
+
+
+		int[] values_linear = new int[BOARD_HEIGHT * BOARD_WIDTH];
+
+		for (int row = 0; row < BOARD_HEIGHT; row++)
+			for (int col = 0; col < BOARD_WIDTH; col++)
+				values_linear[(row * 4) + col] = values[row][col];
+
+
+		for (int i = 0; i < (BOARD_HEIGHT * BOARD_WIDTH) - 1; i++)
+		{
+			int cnt = 0;
+
+			for (int j = i + 1; j < (BOARD_HEIGHT * BOARD_WIDTH) - 1; j++)
+				if (values_linear[i] > values_linear[j])
+					cnt++;
+
+			values_linear[i] = cnt;
+		}
+
+
+		int sum = 0;
+		for (int i = 0; i < BOARD_HEIGHT * BOARD_WIDTH; i++)
+			sum += values_linear[i];
+
+		return (sum % 2) == 0;
+	}
+
+
+	private void switch_values_down(int row_1, int col_1, int row_2, int col_2, int[][] values)
+	{
+		if (row_1 < 0 || BOARD_HEIGHT <= row_1 || row_2 < 0 || BOARD_HEIGHT <= row_2 || col_1 < 0 || BOARD_WIDTH <= col_1 || col_2 < 0 || BOARD_WIDTH <= col_2)
+			return;
+
+		int temp = values[row_1][col_1];
+		values[row_1][col_1] = values[row_2][col_2];
+		values[row_2][col_2] = temp;
+
+		switch_values_down(row_1 + 1, col_1, row_2 + 1, col_2, values);
+	}
+
+
+	private void switch_values_right(int row_1, int col_1, int row_2, int col_2, int[][] values)
+	{
+		if (row_1 < 0 || BOARD_HEIGHT <= row_1 || row_2 < 0 || BOARD_HEIGHT <= row_2 || col_1 < 0 || BOARD_WIDTH <= col_1 || col_2 < 0 || BOARD_WIDTH <= col_2)
+			return;
+
+		int temp = values[row_1][col_1];
+		values[row_1][col_1] = values[row_2][col_2];
+		values[row_2][col_2] = temp;
+
+		switch_values_right(row_1, col_1 + 1, row_2, col_2 + 1, values);
+	}
+
+
+
+
+
 	public void win()
 	{
 		for (int row = 0; row < BOARD_HEIGHT; row++)
@@ -95,7 +244,9 @@ public class BoardModel
 				this.images[row][col] = completed[row][col];
 
 
+
 		this.set_board();
+
 
 
 		this.check_if_complete();
@@ -172,6 +323,7 @@ public class BoardModel
 		}
 
 
+
 		this.check_if_complete();
 	}
 
@@ -181,8 +333,7 @@ public class BoardModel
 
 	private int get_image(int row, int col)
 	{
-		if (row < 0 || 3 < row ||
-			col < 0 || 3 < col)
+		if (row < 0 || BOARD_HEIGHT <= row || col < 0 || BOARD_WIDTH <= col)
 			return -1;
 
 		return this.images[row][col];
@@ -194,11 +345,11 @@ public class BoardModel
 
 	private void set_image(int row, int col, int image_ID)
 	{
-		if (row < 0 || 3 < row ||
-			col < 0 || 3 < col)
+		if (row < 0 || BOARD_HEIGHT <= row || col < 0 || BOARD_WIDTH <= col || image_ID == -1)
+		{
+			Toast.makeText(this.app_context, "ERROR -- BoardModel.java:set_image()", Toast.LENGTH_SHORT).show();
 			return;
-		if (image_ID == -1)
-			return;
+		}
 
 		this.images[row][col] = image_ID;
 	}
@@ -209,11 +360,11 @@ public class BoardModel
 
 	private void set_button(int row, int col, int image_ID)
 	{
-		if (row < 0 || 3 < row ||
-			col < 0 || 3 < col)
+		if (row < 0 || BOARD_HEIGHT <= row || col < 0 || BOARD_WIDTH <= col || image_ID == -1)
+		{
+			Toast.makeText(this.app_context, "ERROR -- BoardModel.java:set_button()", Toast.LENGTH_SHORT).show();
 			return;
-		if (image_ID == -1)
-			return;
+		}
 
 		this.buttons[row][col].setBackgroundResource(image_ID);
 	}
@@ -226,6 +377,6 @@ public class BoardModel
 				if (this.images[row][col] != completed[row][col])
 					return;
 
-		Toast.makeText(this.app_context, "CONGRATS, YOU WIN", Toast.LENGTH_SHORT).show();
+		Toast.makeText(this.app_context, "YOU WIN", Toast.LENGTH_LONG).show();
 	}
 }
