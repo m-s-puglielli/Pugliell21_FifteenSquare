@@ -6,12 +6,146 @@
 	android:layout_height="match_parent"
 	tools:context=".MainActivity">
 
-	<ImageButton
-		android:id="@+id/Card"
+	<androidx.constraintlayout.widget.Guideline
+		android:id="@+id/HorizonalEighthLine"
 		android:layout_width="wrap_content"
 		android:layout_height="wrap_content"
-		app:layout_constraintBottom_toBottomOf="parent"
+		android:orientation="horizontal"
+		app:layout_constraintGuide_percent="0.125" />
+
+	<Button
+		android:id="@+id/Shuffle"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:text="@string/shuffle_board"
+		app:layout_constraintBottom_toTopOf="@+id/HorizonalEighthLine"
 		app:layout_constraintEnd_toEndOf="parent"
-		app:layout_constraintStart_toStartOf="parent"
-		app:layout_constraintTop_toTopOf="parent" />
+		app:layout_constraintStart_toStartOf="parent" />
+
+	<androidx.constraintlayout.widget.Guideline
+		android:id="@+id/VerticleCenterLine"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:orientation="vertical"
+		app:layout_constraintGuide_percent="0.5" />
+
+	<androidx.constraintlayout.widget.Guideline
+		android:id="@+id/HorizontalCenterLine"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:orientation="horizontal"
+		app:layout_constraintGuide_percent="0.5" />
+
+	<ImageButton
+		android:id="@+id/Square00"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		app:layout_constraintBottom_toTopOf="@+id/Square10"
+		app:layout_constraintEnd_toStartOf="@+id/Square01" />
+
+	<ImageButton
+		android:id="@+id/Square01"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		app:layout_constraintBottom_toTopOf="@+id/Square11"
+		app:layout_constraintEnd_toStartOf="@+id/VerticleCenterLine" />
+
+	<ImageButton
+		android:id="@+id/Square02"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		app:layout_constraintBottom_toTopOf="@+id/Square12"
+		app:layout_constraintStart_toStartOf="@+id/VerticleCenterLine" />
+
+	<ImageButton
+		android:id="@+id/Square03"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		app:layout_constraintBottom_toTopOf="@+id/Square13"
+		app:layout_constraintStart_toEndOf="@+id/Square02" />
+
+	<ImageButton
+		android:id="@+id/Square10"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		app:layout_constraintBottom_toTopOf="@+id/HorizontalCenterLine"
+		app:layout_constraintEnd_toStartOf="@+id/Square11" />
+
+	<ImageButton
+		android:id="@+id/Square11"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		app:layout_constraintBottom_toTopOf="@+id/HorizontalCenterLine"
+		app:layout_constraintEnd_toStartOf="@+id/VerticleCenterLine" />
+
+	<ImageButton
+		android:id="@+id/Square12"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		app:layout_constraintBottom_toTopOf="@+id/HorizontalCenterLine"
+		app:layout_constraintStart_toStartOf="@+id/VerticleCenterLine" />
+
+	<ImageButton
+		android:id="@+id/Square13"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		app:layout_constraintBottom_toTopOf="@+id/HorizontalCenterLine"
+		app:layout_constraintStart_toEndOf="@+id/Square12" />
+
+	<ImageButton
+		android:id="@+id/Square20"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		app:layout_constraintEnd_toStartOf="@+id/Square21"
+		app:layout_constraintTop_toTopOf="@+id/HorizontalCenterLine" />
+
+	<ImageButton
+		android:id="@+id/Square21"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		app:layout_constraintEnd_toStartOf="@+id/VerticleCenterLine"
+		app:layout_constraintTop_toTopOf="@+id/HorizontalCenterLine" />
+
+	<ImageButton
+		android:id="@+id/Square22"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		app:layout_constraintStart_toStartOf="@+id/VerticleCenterLine"
+		app:layout_constraintTop_toTopOf="@+id/HorizontalCenterLine" />
+
+	<ImageButton
+		android:id="@+id/Square23"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		app:layout_constraintStart_toEndOf="@+id/Square22"
+		app:layout_constraintTop_toTopOf="@+id/HorizontalCenterLine" />
+
+	<ImageButton
+		android:id="@+id/Square30"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		app:layout_constraintEnd_toStartOf="@+id/Square31"
+		app:layout_constraintTop_toBottomOf="@+id/Square20" />
+
+	<ImageButton
+		android:id="@+id/Square31"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		app:layout_constraintEnd_toStartOf="@+id/VerticleCenterLine"
+		app:layout_constraintTop_toBottomOf="@+id/Square21" />
+
+	<ImageButton
+		android:id="@+id/Square32"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		app:layout_constraintStart_toStartOf="@+id/VerticleCenterLine"
+		app:layout_constraintTop_toBottomOf="@+id/Square22" />
+
+	<ImageButton
+		android:id="@+id/Square33"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		app:layout_constraintStart_toEndOf="@+id/Square32"
+		app:layout_constraintTop_toBottomOf="@+id/Square23" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
