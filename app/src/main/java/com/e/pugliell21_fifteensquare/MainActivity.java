@@ -1,7 +1,7 @@
 /**
  * @formatter:off
  * @author Maximilian Puglielli
- * @version 11/07/2019
+ * @version Last edited on 11/08/2019
  */
 
 /* PROGRAM DESCRIPTION
@@ -23,8 +23,6 @@
  *          example, where a board square and the square directly below it switch positions:
  *              buttons[row][col].setBackgroundResource(images[row + 1][col]);
  *              buttons[row + 1][col].setBackgroundResource(images[row][col]);
- * This program has three important parts. The main activity, which is this class, the button handler,
- * and the board model. The main activity initializes the program
  */
 
 package com.e.pugliell21_fifteensquare;
